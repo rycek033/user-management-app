@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { createUser, getUserById, updateUser } from '../services/api';
 
 export function UserForm() {
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate();
     const isEditMode = Boolean(id);
 
     const [formData, setFormData] = useState({
@@ -79,6 +80,11 @@ export function UserForm() {
             if (!isEditMode) {
                 setFormData({ name: '', email: '', city: '', companyName: '' });
             }
+
+            setTimeout(() => {
+                navigate('/users');
+            }, 2000);
+
         } catch (err) {
             setNotification('An error occurred. Please try again.');
         } finally {
