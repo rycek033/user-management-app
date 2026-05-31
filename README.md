@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# Recruitment Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + Vite + TypeScript sample app used for a recruitment task. It demonstrates a simple user management UI with pages for listing users, viewing details, and creating/updating users. The app calls APIs through a central service module.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- List users
+- View user details
+- Create / edit user via a form
+- Show user posts (component)
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + TypeScript
+- Vite for bundling and dev server
+- Minimal CSS (project-local)
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 16+ and npm (or yarn)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Install dependencies:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Run dev server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+3. Build for production:
+
+```bash
+npm run build
+```
+
+4. Preview production build:
+
+```bash
+npm run preview
+```
+
+If your `package.json` uses `yarn`, replace `npm` with `yarn`.
+
+## Project structure (key files)
+
+- [index.html](index.html)
+- [vite.config.ts](vite.config.ts)
+- [src/main.tsx](src/main.tsx)
+- [src/App.tsx](src/App.tsx)
+- [src/pages/UserList.tsx](src/pages/UserList.tsx)
+- [src/pages/UserDetails.tsx](src/pages/UserDetails.tsx)
+- [src/pages/UserForm.tsx](src/pages/UserForm.tsx)
+- [src/components/UserPosts.tsx](src/components/UserPosts.tsx)
+- [src/services/api.ts](src/services/api.ts) — central API calls
+- [src/types/index.ts](src/types/index.ts)
+
+## How it works
+
+The UI is organized into page components under `src/pages/`. API requests are encapsulated in `src/services/api.ts` so the UI code stays focused on rendering and state management. Types are declared under `src/types` to keep components type-safe.
+
+## Notes / Next steps
+
+- Add tests and CI configuration.
+- Add form validation and stronger error handling in `UserForm`.
+- Add E2E tests for main flows (list → details → create).
+
+## Contributing
+
+Feel free to open issues or submit PRs with improvements.
