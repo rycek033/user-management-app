@@ -17,7 +17,7 @@ A small React + Vite + TypeScript sample app used for a recruitment task. It dem
 
 ## Prerequisites
 
-- Node.js 16+ and npm (or yarn)
+- Node.js 16+ and npm
 
 ## Installation
 
@@ -44,8 +44,6 @@ npm run build
 ```bash
 npm run preview
 ```
-
-If your `package.json` uses `yarn`, replace `npm` with `yarn`.
 
 ## Tests
 
