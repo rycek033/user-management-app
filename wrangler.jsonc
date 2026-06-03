@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "user-management-app",
+  "name": "usermanagement",
   "compatibility_date": "2026-06-03",
   "observability": {
     "enabled": true
