@@ -1,7 +1,5 @@
 # Recruitment Task
 
-A small React + Vite + TypeScript sample app used for a recruitment task. It demonstrates a simple user management UI with pages for listing users, viewing details, and creating/updating users. The app calls APIs through a central service module.
-
 ## Features
 
 - List users
