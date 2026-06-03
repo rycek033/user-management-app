@@ -7,8 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+<<<<<<< HEAD
     "preview": "vite preview",
     "test": "vitest --environment jsdom"
+=======
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+>>>>>>> origin/main
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -19,6 +24,7 @@
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.39.2",
     "@eslint/js": "^10.0.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -36,6 +42,10 @@
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12",
     "vite-plugin-pwa": "^1.3.0",
+<<<<<<< HEAD
     "vitest": "^4.1.8"
+=======
+    "wrangler": "^4.97.0"
+>>>>>>> origin/main
   }
 }
