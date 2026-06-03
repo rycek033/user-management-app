@@ -69,11 +69,6 @@ The application is deployed at:
 
 https://usermanagement.rycek033.workers.dev
 
-If you redeploy the app, make sure the build still passes before publishing:
-
-```bash
-npm run build
-```
 
 ## Project structure (key files)
 
