@@ -47,6 +47,34 @@ npm run preview
 
 If your `package.json` uses `yarn`, replace `npm` with `yarn`.
 
+## Tests
+
+This project uses `Vitest` with `jsdom` for browser-like component testing.
+
+Run the test suite with:
+
+```bash
+npm run test
+```
+
+If you want linting as part of local verification, also run:
+
+```bash
+npm run lint
+```
+
+## Deployment
+
+The application is deployed at:
+
+https://usermanagement.rycek033.workers.dev
+
+If you redeploy the app, make sure the build still passes before publishing:
+
+```bash
+npm run build
+```
+
 ## Project structure (key files)
 
 - [index.html](index.html)
@@ -63,13 +91,3 @@ If your `package.json` uses `yarn`, replace `npm` with `yarn`.
 ## How it works
 
 The UI is organized into page components under `src/pages/`. API requests are encapsulated in `src/services/api.ts` so the UI code stays focused on rendering and state management. Types are declared under `src/types` to keep components type-safe.
-
-## Notes / Next steps
-
-- Add tests and CI configuration.
-- Add form validation and stronger error handling in `UserForm`.
-- Add E2E tests for main flows (list → details → create).
-
-## Contributing
-
-Feel free to open issues or submit PRs with improvements.
