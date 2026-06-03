@@ -7,13 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-<<<<<<< HEAD
-    "preview": "vite preview",
-    "test": "vitest --environment jsdom"
-=======
     "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
->>>>>>> origin/main
+    "deploy": "npm run build && wrangler deploy",
+    "test": "vitest --environment jsdom"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -42,10 +38,7 @@
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12",
     "vite-plugin-pwa": "^1.3.0",
-<<<<<<< HEAD
+    "wrangler": "^4.97.0",
     "vitest": "^4.1.8"
-=======
-    "wrangler": "^4.97.0"
->>>>>>> origin/main
   }
 }
