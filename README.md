@@ -101,6 +101,3 @@ https://usermanagement.rycek033.workers.dev
 - [src/services/api.ts](src/services/api.ts) - API layer
 - [src/types/index.ts](src/types/index.ts) - shared TypeScript types
 
-## Notes
-
-`npm audit` currently reports a high-severity esbuild warning through the Cloudflare toolchain (`@cloudflare/vite-plugin` -> `wrangler` -> `esbuild`). This is a transitive dev-dependency issue in the build/dev tooling, not application code, and the upstream advisory currently has no fix available.
