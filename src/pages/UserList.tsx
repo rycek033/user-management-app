@@ -1,39 +1,17 @@
-import { useState, useEffect } from 'react';
-import type { User } from '../types';
-import { getUsers, deleteUser } from '../services/api';
+import { useState } from 'react';
 import { BiEnvelope, BiBuildingHouse, BiMap, BiEdit, BiTrash, BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { useUsers } from '../hooks/useUsers';
 
 export function UserList() {
-    const [users, setUsers] = useState<User[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [searchQuery, setSearchQuery] = useState('');
+    const { users, isLoading, error, deleteUser } = useUsers()
+    const [searchQuery, setSearchQuery] = useState('')
+    const [userToDelete, setUserToDelete] = useState<{ id: number; name: string } | null>(null)
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const data = await getUsers();
-                setUsers(data);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'Unknown error');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUsers();
-    }, []);
-
-    const handleDelete = async (id: number, name: string) => {
-        if (window.confirm(`Are you sure you want to delete user "${name}"?`)) {
-            try {
-                await deleteUser(id.toString());
-                setUsers(users.filter((user) => user.id !== id));
-                alert(`User "${name}" has been deleted.`);
-            } catch (err) {
-                alert(`Failed to delete user "${name}". Please try again.`);
-            }
+    const handleConfirmDelete = async () => {
+        if (userToDelete) {
+            await deleteUser(String(userToDelete.id))
+            setUserToDelete(null);
         }
     };
 
@@ -42,7 +20,7 @@ export function UserList() {
         user.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    if (loading) {
+    if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center p-12">
                 <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4"></div>
@@ -127,7 +105,7 @@ export function UserList() {
                                 </Link>
 
                                 <button
-                                    onClick={() => handleDelete(user.id, user.name)}
+                                    onClick={() => setUserToDelete({ id: user.id, name: user.name })}
                                     className="px-3 py-2 bg-red-50 text-red-600 rounded border border-red-100 hover:bg-red-100 transition-colors flex items-center justify-center"
                                     title="Delete User"
                                 >
@@ -136,6 +114,31 @@ export function UserList() {
                             </div>
                         </div>
                     ))}
+                </div>
+            )}
+
+            {userToDelete && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4">
+                        <h3 className="text-xl font-bold mb-4 text-gray-900">Confirm Deletion</h3>
+                        <p className="text-gray-600 mb-6">
+                            Are you sure you want to delete user "{userToDelete.name}"? This action cannot be undone.
+                        </p>
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={() => setUserToDelete(null)}
+                                className="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors font-medium"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleConfirmDelete}
+                                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors font-medium"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
