@@ -1,59 +1,76 @@
-# Recruitment Task
+# User Management App
+
+A React + TypeScript user management app built with Vite. It lets you browse users, view details, edit records, and inspect related posts.
 
 ## Features
 
-- List users
-- View user details
-- Create / edit user via a form
-- Show user posts (component)
+- User list with navigation to individual details
+- Create and edit user forms with validation
+- User post display as a reusable component
+- Responsive UI with project-local styling
 
-## Tech stack
+## Tech Stack
 
-- React + TypeScript
-- Vite for bundling and dev server
-- Minimal CSS (project-local)
+- React 19
+- TypeScript
+- Vite
+- React Hook Form + Zod
+- React Router
+- Tailwind CSS v4
+- Vitest + Testing Library
+- Cloudflare tooling for preview and deploy
 
-## Prerequisites
+## Requirements
 
-- Node.js 16+ and npm
+- Node.js 20.19+ or 22.12+
+- npm
 
-## Installation
+## Getting Started
 
-1. Install dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Run dev server:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-3. Build for production:
+Create a production build:
 
 ```bash
 npm run build
 ```
 
-4. Preview production build:
+Preview the production build locally through Wrangler:
 
 ```bash
 npm run preview
 ```
 
-## Tests
+## Scripts
 
-This project uses `Vitest` with `jsdom` for browser-like component testing.
+- `npm run dev` - start Vite in development mode
+- `npm run build` - type-check and build the app
+- `npm run lint` - run ESLint
+- `npm run test` - run Vitest in jsdom
+- `npm run preview` - build and start Wrangler dev mode
+- `npm run deploy` - build and deploy with Wrangler
 
-Run the test suite with:
+## Testing
+
+The test suite uses Vitest with jsdom for browser-like component tests.
+
+Run all tests with:
 
 ```bash
 npm run test
 ```
 
-If you want linting as part of local verification, also run:
+To include linting in local verification:
 
 ```bash
 npm run lint
@@ -61,24 +78,29 @@ npm run lint
 
 ## Deployment
 
-The application is deployed at:
+The app is configured for Cloudflare Workers deployment with Wrangler.
+
+Production deployment:
+
+```bash
+npm run deploy
+```
+
+Current deployment target:
 
 https://usermanagement.rycek033.workers.dev
 
+## Project Structure
 
-## Project structure (key files)
+- [src/main.tsx](src/main.tsx) - app entry point
+- [src/App.tsx](src/App.tsx) - top-level app shell and routing
+- [src/pages/UserList.tsx](src/pages/UserList.tsx) - user list page
+- [src/pages/UserDetails.tsx](src/pages/UserDetails.tsx) - user details page
+- [src/pages/UserForm.tsx](src/pages/UserForm.tsx) - create/edit form page
+- [src/components/UserPosts.tsx](src/components/UserPosts.tsx) - related posts component
+- [src/services/api.ts](src/services/api.ts) - API layer
+- [src/types/index.ts](src/types/index.ts) - shared TypeScript types
 
-- [index.html](index.html)
-- [vite.config.ts](vite.config.ts)
-- [src/main.tsx](src/main.tsx)
-- [src/App.tsx](src/App.tsx)
-- [src/pages/UserList.tsx](src/pages/UserList.tsx)
-- [src/pages/UserDetails.tsx](src/pages/UserDetails.tsx)
-- [src/pages/UserForm.tsx](src/pages/UserForm.tsx)
-- [src/components/UserPosts.tsx](src/components/UserPosts.tsx)
-- [src/services/api.ts](src/services/api.ts) — central API calls
-- [src/types/index.ts](src/types/index.ts)
+## Notes
 
-## How it works
-
-The UI is organized into page components under `src/pages/`. API requests are encapsulated in `src/services/api.ts` so the UI code stays focused on rendering and state management. Types are declared under `src/types` to keep components type-safe.
+`npm audit` currently reports a high-severity esbuild warning through the Cloudflare toolchain (`@cloudflare/vite-plugin` -> `wrangler` -> `esbuild`). This is a transitive dev-dependency issue in the build/dev tooling, not application code, and the upstream advisory currently has no fix available.
